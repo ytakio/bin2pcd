@@ -106,6 +106,7 @@ namespace pcl {
 				int &file_version,
 				const int offset = 0) override
 		{
+			int count = 0;
 			std::ifstream ist(file_name.c_str(), std::ios::in | std::ios::binary);
 			for (;;) {
 				point_data_t data;
@@ -118,7 +119,9 @@ namespace pcl {
 				PCLPointCloud2 pcl2;
 				toPCLPointCloud2(point, pcl2);
 				cloud += pcl2;
+				++count;
 			}
+			return count;
 		}
 
 		using FileReader::read;
